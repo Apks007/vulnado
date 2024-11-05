@@ -16,8 +16,8 @@ jobs:
           distribution: 'temurin'
           java-version: '11'
       
-      - name: Build with Ant
-        run: ant build  # Adjust to your actual build command
+      - name: Build with Maven
+        run: Maven build  # Adjust to your actual build command
       
       - name: Create project zip
         run: zip -r project.zip . -x "*.git*" "*/node_modules/*" "*/vendor/*" "*.zip"
