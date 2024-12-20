@@ -42,12 +42,10 @@ jobs:
         fi   
     
     
-    - name: Rebuild with Maven
-      if: env.canProceed == 'true'
+    - name: Rebuild with Maven     
       run: mvn clean package
     
-    - name: Upload artifact
-      if: env.canProceed == 'true'
+    - name: Upload artifact      
       uses: actions/upload-artifact@v3
       with:
         name: sast-project-files
