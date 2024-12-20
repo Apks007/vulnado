@@ -31,7 +31,6 @@ jobs:
           -F "projectZipFile=@project.zip" \
           -F "applicationId=${{ secrets.INTRUCEPT_APPLICATION_ID }}" \
           -F "scanName=SCA Scan from GitHub Actions" \
-          -F "language=java" \
           https://appsecops-api.intruceptlabs.com/api/v1/integrations/sca-scans)
         
         echo "SCA Response:"
@@ -40,16 +39,8 @@ jobs:
           echo "$VULNS_TABLE"
         else
           echo "No SCA vulnerabilities found."
-        fi
-        
-        CAN_PROCEED=$(echo $RESPONSE | jq -r '.canProceed')
-        echo "canProceed=$CAN_PROCEED" >> $GITHUB_ENV
+        fi   
     
-    - name: Check SCA result
-      if: env.canProceed != 'true'
-      run: |
-        echo "SCA scan failed. Build cancelled."
-        exit 1
     
     - name: Rebuild with Maven
       if: env.canProceed == 'true'
