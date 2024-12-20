@@ -43,11 +43,9 @@ jobs:
     
     
     - name: Rebuild with Maven
-      if: env.canProceed == 'true'
       run: mvn clean package
     
     - name: Upload artifact
-      if: env.canProceed == 'true'
       uses: actions/upload-artifact@v3
       with:
         name: sca-project-files
